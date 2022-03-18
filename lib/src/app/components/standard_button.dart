@@ -9,8 +9,16 @@ class StandardButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 50,
+      width: double.infinity,
+      height: 40,
       child: ElevatedButton(
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(18.0),
+                side: BorderSide(color: Colors.white)),
+          ),
+        ),
         onPressed: onPressed,
         child: Text(
           buttonText,
