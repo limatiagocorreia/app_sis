@@ -47,6 +47,7 @@ class IntroPage extends StatelessWidget {
                   );
                 },
               ),
+              const SizedBox(height: 15.0),
               StandardClickableText(
                 label: "Esqueci a senha",
                 onTap: () {},
