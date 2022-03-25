@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class StandardButton extends StatelessWidget {
   final String buttonText;
   final Function() onPressed;
+  final bool isCenter;
 
-  StandardButton({@required this.buttonText, @required this.onPressed});
+  StandardButton({@required this.buttonText, @required this.onPressed, this.isCenter});
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +21,12 @@ class StandardButton extends StatelessWidget {
           ),
         ),
         onPressed: onPressed,
-        child: Text(
-          buttonText,
+        child: Align(
+          alignment: isCenter ? Alignment.center:Alignment.centerLeft,
+          child: Text(
+      
+            buttonText,
+          ),
         ),
       ),
     );
