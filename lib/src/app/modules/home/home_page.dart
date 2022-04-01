@@ -1,6 +1,7 @@
 import 'package:app_sis/src/app/components/standard_button.dart';
 import 'package:app_sis/src/app/components/standard_page.dart';
 import 'package:app_sis/src/app/modules/account_balance/account_balance_page.dart';
+import 'package:app_sis/src/app/modules/account_balance/balance_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -19,7 +20,7 @@ class HomePage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: ((context) => AccountBalancePage()),
+                    builder: ((context) => BalancePage()),
                   ),
                 );
               },

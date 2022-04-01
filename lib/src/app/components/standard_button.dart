@@ -5,7 +5,10 @@ class StandardButton extends StatelessWidget {
   final Function() onPressed;
   final bool isCenter;
 
-  StandardButton({@required this.buttonText, @required this.onPressed, this.isCenter});
+  StandardButton(
+      {required this.buttonText,
+      required this.onPressed,
+      this.isCenter = true});
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +25,8 @@ class StandardButton extends StatelessWidget {
         ),
         onPressed: onPressed,
         child: Align(
-          alignment: isCenter ? Alignment.center:Alignment.centerLeft,
+          alignment: isCenter ? Alignment.center : Alignment.centerLeft,
           child: Text(
-      
             buttonText,
           ),
         ),

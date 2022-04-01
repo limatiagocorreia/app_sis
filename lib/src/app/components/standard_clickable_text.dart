@@ -5,7 +5,7 @@ class StandardClickableText extends StatelessWidget {
   final String label;
   final Function() onTap;
 
-  StandardClickableText({@required this.label, @required this.onTap});
+  StandardClickableText({required this.label, required this.onTap});
 
   @override
   Widget build(BuildContext context) {

@@ -5,7 +5,7 @@ class StandardPage extends StatelessWidget {
   final Widget body;
   final String pageTitle;
 
-  StandardPage({@required this.body, @required this.pageTitle});
+  StandardPage({required this.pageTitle, required this.body});
 
   @override
   Widget build(BuildContext context) {
