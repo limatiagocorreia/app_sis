@@ -1,7 +1,8 @@
+import 'package:app_sis/src/app/components/standard_button.dart';
 import 'package:app_sis/src/app/components/standard_card.dart';
 import 'package:app_sis/src/app/components/standard_page.dart';
 import 'package:app_sis/src/app/components/standard_text_form.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class BalancePage extends StatefulWidget {
   @override
@@ -10,15 +11,27 @@ class BalancePage extends StatefulWidget {
   }
 }
 
-//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
 class _BalancePageState extends State<BalancePage> {
   TextEditingController monthlyIncomeController = TextEditingController();
-  String initialValue = '';
 
-  presentMonthlyIncome({required String value}){
-    setState(() {
-      initialValue = value;
-    });
+  double initialValue = 0.0;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  presentMonthlyIncome({required String value}) {
+    setState(
+      () {
+        initialValue = double.parse(value);
+      },
+    );
   }
 
   @override
@@ -37,7 +50,16 @@ class _BalancePageState extends State<BalancePage> {
           SizedBox(height: 20),
           StandardCard(
             leftText: 'R\$',
-            rightText: initialValue,
+            rightText: initialValue.toString(),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          StandardButton(
+            buttonText: 'Limpar',
+            onPressed: () {
+              presentMonthlyIncome(value: initialValue.toString());
+            },
           )
         ],
       ),
