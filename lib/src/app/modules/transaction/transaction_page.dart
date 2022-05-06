@@ -1,5 +1,7 @@
+import 'package:app_sis/src/app/components/standard_button.dart';
 import 'package:app_sis/src/app/components/standard_card.dart';
 import 'package:app_sis/src/app/components/standard_page.dart';
+import 'package:app_sis/src/app/components/standard_text_form.dart';
 import 'package:app_sis/src/app/model/transaction_model.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +13,34 @@ class TransactionPage extends StatefulWidget {
 }
 
 class _TransactionPageState extends State<TransactionPage> {
+  TextEditingController transactionNameController = TextEditingController();
+  TextEditingController transactionValueController = TextEditingController();
+  FocusNode transacationNameFocus = FocusNode();
+  FocusNode transacationValueFocus = FocusNode();
+
+  addNewTransaction(
+      {required String? transactionName, required String transactionValue}) {
+    setState(() {
+      transactionList.insert(
+        0,
+        TransactionModel(
+            transactionName: transactionName,
+            transactionValue: num.parse(transactionValue)),
+      );
+    });
+  }
+
+  Future<void> _showDialog(
+      {required String? transactionName,
+      required String transactionValue}) async {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(title: Text(transactionName.toString()),);
+      },
+    );
+  }
+
   List<TransactionModel> transactionList = [
     TransactionModel(transactionName: 'Café com o @', transactionValue: 50.0),
     TransactionModel(
@@ -39,6 +69,31 @@ class _TransactionPageState extends State<TransactionPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            StandardTextForm(
+              focusNode: transacationNameFocus,
+              label: 'Nome da transação:',
+              userInputController: transactionNameController,
+              onEditingComplete: () {
+                transacationValueFocus.nextFocus();
+              },
+            ),
+            const SizedBox(height: 5),
+            StandardTextForm(
+              focusNode: transacationValueFocus,
+              label: 'Valor da transação:',
+              userInputController: transactionValueController,
+            ),
+            const SizedBox(height: 5),
+            StandardButton(
+              buttonText: 'Adicionar transação',
+              onPressed: () {
+                addNewTransaction(
+                  transactionName: transactionNameController.text,
+                  transactionValue: transactionValueController.text,
+                );
+              },
+            ),
+            const SizedBox(height: 5),
             ListView.separated(
               shrinkWrap: true,
               itemCount: transactionList.length,
@@ -52,7 +107,12 @@ class _TransactionPageState extends State<TransactionPage> {
                 return MouseRegion(
                   cursor: SystemMouseCursors.click,
                   child: GestureDetector(
-                    onTap: (() => print(transactionItem.transactionName)),
+                    onTap: (() {
+                      _showDialog(
+                        transactionName: transactionItem.transactionName,
+                        transactionValue: transactionItem.transactionValue.toString(),
+                      );
+                    }),
                     child: StandardCard(
                       leftText: transactionItem.transactionName,
                       rightText: 'R\$${transactionItem.transactionValue}',

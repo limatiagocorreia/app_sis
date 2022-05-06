@@ -21,7 +21,7 @@ class StandardCard extends StatelessWidget {
             leftText!,
             style: TextStyle(fontSize: 20),
           ),
-          SizedBox(width: 5),
+          const Spacer(),
           Text(
             rightText!,
             style: TextStyle(fontSize: 20),
